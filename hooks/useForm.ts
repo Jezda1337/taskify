@@ -6,7 +6,7 @@ export default function (initialInputs: any) {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const inputHandler = useCallback(
-    (value: any, inputIdentifier: any) => {
+    (value: any, inputIdentifier: string, blurred?: boolean) => {
       const updatedInputs = { ...inputs };
       const updatedElement = { ...updatedInputs[inputIdentifier] };
 
@@ -17,6 +17,9 @@ export default function (initialInputs: any) {
       }
       updatedElement.value = value;
       updatedElement.touched = true;
+      if (blurred) {
+        updatedElement.blurred = true;
+      }
       updatedInputs[inputIdentifier] = updatedElement;
 
       let formIsValid = true;

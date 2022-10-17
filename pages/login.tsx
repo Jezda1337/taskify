@@ -1,24 +1,18 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import useForm from "hooks/useForm";
 import { Validators } from "utils/Validators";
-
-type Login = {
-  email: null | string;
-  password: null | string;
-  keepMeLogin: boolean;
-};
+import MyFormControl from "components/shared/MyFormControl";
 
 const initialInputs = {
   email: {
     elementType: "text-input",
     label: "Your email",
     value: "",
-    validators: [Validators.email, Validators.required],
-    validation: {
-      required: true,
-      email: true,
-    },
+    validators: [Validators.required, Validators.email],
+    required: true,
     valid: false,
+    blurred: false,
+    validationErrorMessage: "",
     touched: false,
   },
   password: {
@@ -26,54 +20,52 @@ const initialInputs = {
     label: "Your password",
     value: "",
     validators: [Validators.required],
-    validation: {
-      required: true,
-    },
+    required: true,
     valid: false,
+    blurred: false,
+    validationErrorMessage: "",
     touched: false,
   },
-  // rememberMe: {
-  //   elementType: "text-input",
-  //   label: "Remember me",
-  //   value: "",
-  //   validators: [],
-  //   validation: {},
-  //   valid: false,
-  //   touched: false,
-  // },
+  rememberMe: {
+    elementType: "checkbox",
+    label: "Remember me",
+    value: false,
+    validators: [],
+    required: false,
+    valid: true,
+    touched: false,
+  },
 };
 
 const Login = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
-  console.log(inputs);
+
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 max-w-xl m-auto">
         <h3 className="text-2xl mb-8">Login</h3>
-        <form className="w-full flex flex-col items-center gap-4 justify-center ">
-          {/* {inputs.map((input: any) => (
-            <TextField
-              key={input.id}
-              required={input.validation.required}
-              value={input.value}
-              label={input.label}
-              onChange={(e) => setInputs(e.target.value, inputs.id)}
-            />
-          ))} */}
-          {Object.entries(inputs).map(([key, value]: any) => (
-            <TextField
+        <form className="w-full flex flex-col gap-4 justify-center ">
+          {Object.entries(inputs).map(([key, formCtrl]: any) => (
+            <MyFormControl
               key={key}
-              required={value.validation.required}
-              value={value.value || ""}
-              label={value.label}
-              error={!value.valid && value.touched}
-              onChange={(e) => setInputs(e.target.value, key)}
+              elementType={formCtrl.elementType}
+              required={formCtrl.required}
+              value={formCtrl.value}
+              label={formCtrl.label}
+              fullWidth
+              error={!formCtrl.valid && formCtrl.touched && formCtrl.blurred}
+              inputHandler={(e: any) => setInputs(e.target.value, key)}
+              blurHandler={(e: any) => setInputs(e.target.value, key, true)}
+              checkboxHandler={(e: any) => setInputs(!!e.target.checked, key)}
             />
           ))}
-          {/* <FormGroup className="w-6/12">
-            <FormControlLabel control={<Checkbox />} label="Remember me" />
-          </FormGroup> */}
-          <Button type="submit" className="w-6/12" variant="outlined">
+          <Button
+            type="submit"
+            fullWidth
+            variant="outlined"
+            disabled={!formIsValid}
+            className="mt-4"
+          >
             Login
           </Button>
         </form>

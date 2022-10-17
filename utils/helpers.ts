@@ -1,8 +1,8 @@
 export const checkValidity = (value: any, validators: any): any => {
-  let isValid = true;
-  validators.every((validator: any) => {
-    isValid = validator(value);
-    if (!isValid) return false;
-  });
-  return isValid;
+  const validField = { isValid: true, message: '' }
+  const invalidField = validators
+    .map((validator: any) => validator(value))
+    .find((field: any) => !field.isValid);
+    
+  return invalidField || validField;
 };
