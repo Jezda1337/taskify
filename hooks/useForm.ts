@@ -32,7 +32,7 @@ export default function (initialInputs: FormControls) {
           input.valid = validity.isValid;
           input.validationErrorMessage = validity.message;
         }
-        isFormValid = input.valid && input.touched && isFormValid;
+        isFormValid = input.valid && isFormValid;
       });
 
       // Set new state
