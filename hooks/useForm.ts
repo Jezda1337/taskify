@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { checkValidity } from "utils/helpers";
 
-export default function (initialInputs: any) {
+export default function(initialInputs: any) {
   const [inputs, setInputs] = useState(initialInputs);
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -10,7 +10,7 @@ export default function (initialInputs: any) {
       const updatedInputs = { ...inputs };
       const updatedElement = { ...updatedInputs[inputIdentifier] };
 
-      if (updatedElement.validators.length) {
+      if (updatedElement.validators?.length) {
         const validity = checkValidity(value, updatedElement.validators);
         updatedElement.valid = validity.isValid;
         updatedElement.validationErrorMessage = validity.message;

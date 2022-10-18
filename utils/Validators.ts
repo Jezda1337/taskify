@@ -2,7 +2,7 @@ const emailValidationPattern =
   /^\w+([.-]?\w+)+@\w+([.:]?\w+)+(\.[a-zA-Z0-9]{2,})+$/;
 
 export const Validators = {
-  required: (value: any) => {
+  required: (value: string) => {
     let isValid = true;
     let message = "";
 
@@ -14,6 +14,7 @@ export const Validators = {
 
     return { isValid, message };
   },
+
   email: (value: any) => {
     let isValid = true;
     isValid = !!value.match(emailValidationPattern) && isValid;

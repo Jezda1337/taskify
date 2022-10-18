@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormControl } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 
@@ -10,6 +10,7 @@ const MyFormControl = (props) => {
       inputElement = (
         <FormControl fullWidth>
           <TextField
+            type={props.type}
             fullWidth
             variant="outlined"
             onChange={props.inputHandler}
@@ -19,6 +20,7 @@ const MyFormControl = (props) => {
             required={props.required}
             spellCheck="false"
             value={props.value || ""}
+            error={props.error}
           />
         </FormControl>
       );
@@ -40,6 +42,7 @@ const MyFormControl = (props) => {
             required={props.required}
             spellCheck="false"
             value={props.value || ""}
+            error={props.error}
           />
         </FormControl>
       );
