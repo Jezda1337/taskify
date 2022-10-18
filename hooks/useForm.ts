@@ -3,6 +3,7 @@ import { checkValidity } from "utils/helpers";
 import cloneDeep from 'lodash.clonedeep';
 import { FormControls } from "types/auth/form-controls.type";
 import { FormControl } from "types/auth/form-control.type";
+import { InputValue } from "types/shared/input-value.type";
 
 export default function (initialInputs: FormControls) {
   const [inputs, setInputs] = useState(initialInputs);
@@ -10,7 +11,7 @@ export default function (initialInputs: FormControls) {
 
   const inputHandler = useCallback(
     (
-      value: FormControls[keyof FormControls]['value'],
+      value: InputValue,
       currentInputKey: keyof FormControls,
       blurred?: boolean
     ) => {
