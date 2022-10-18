@@ -1,8 +1,17 @@
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
+import { ChangeEvent, FocusEvent } from "react";
+import { FormControl as MyFormControl } from "types/auth/form-control.type";
 
-const MyFormControl = (props) => {
+type MyControlProps = Partial<MyFormControl> & {
+  inputHandler?: (e: ChangeEvent<HTMLInputElement>) => void;
+  blurHandler?: (e: FocusEvent<HTMLInputElement>) => void;
+  checkboxHandler?: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
+}
+
+const MyFormControl = (props: MyControlProps) => {
   let inputElement = null;
 
   switch (props.elementType) {
@@ -53,7 +62,7 @@ const MyFormControl = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={props.value || false}
+              checked={!!props.value}
               onChange={props.checkboxHandler}
               color="primary"
             />

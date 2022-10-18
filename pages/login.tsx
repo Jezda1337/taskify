@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 import MyFormControl from "components/shared/MyFormControl";
 import useForm from "hooks/useForm";
+import { FormControls } from "types/auth/form-controls.type";
 import { Validators } from "utils/Validators";
 
-const initialInputs = {
+const initialInputs: FormControls = {
   email: {
     elementType: "text-input",
     type: "email",
@@ -47,7 +48,7 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center min-h-screen p-4 max-w-md m-auto ">
         <h3 className="text-2xl mb-8">Login</h3>
         <form className="w-full flex flex-col gap-4 justify-center ">
-          {Object.entries(inputs).map(([key, formCtrl]: any) => (
+          {Object.entries(inputs).map(([key, formCtrl]) => (
             <MyFormControl
               type={formCtrl.type}
               key={key}
@@ -55,11 +56,10 @@ const Login = () => {
               required={formCtrl.required}
               value={formCtrl.value}
               label={formCtrl.label}
-              fullWidth
               error={!formCtrl.valid && formCtrl.touched && formCtrl.blurred}
-              inputHandler={(e: any) => setInputs(e.target.value, key)}
-              blurHandler={(e: any) => setInputs(e.target.value, key, true)}
-              checkboxHandler={(e: any) => setInputs(!!e.target.checked, key)}
+              inputHandler={e => setInputs(e.target.value, key)}
+              blurHandler={e => {setInputs(e.target.value, key, true)}}
+              checkboxHandler={e => setInputs(!!e.target.checked, key)}
             />
           ))}
           <Button

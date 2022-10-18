@@ -1,8 +1,17 @@
-export const checkValidity = (value: any, validators: any, formState: any): any => {
-  const validField = { isValid: true, message: "" };
+import { FormControls } from "types/auth/form-controls.type";
+import { Validator } from "types/auth/validator.type";
+import { Validity } from "types/auth/validity.type";
+import { InputValue } from "types/shared/input-value.type";
+
+export const checkValidity = (
+  value: InputValue,
+  validators: Validator[],
+  formState: FormControls
+): Validity => {
+  const validField = { isValid: true, message: "", };
   const invalidField = validators
-    .map((validator: any) => validator(value, formState))
-    .find((field: any) => !field.isValid);
+    .map((validator) => validator(value, formState))
+    .find((field) => !field.isValid);
 
   return invalidField || validField;
 };

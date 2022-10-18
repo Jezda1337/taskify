@@ -1,31 +1,37 @@
-const emailValidationPattern =
-  /^\w+([.-]?\w+)+@\w+([.:]?\w+)+(\.[a-zA-Z0-9]{2,})+$/;
+import { FormControls } from "types/auth/form-controls.type";
+import { InputValue } from "types/shared/input-value.type";
+import { EMAIL_REGEX } from "./constants";
+
 
 export const Validators = {
-  required: (value: string, formState: any) => {
-    let isValid = true;
-    let message = "";
+  required: (value: InputValue, formState: FormControls) => {
+    if (typeof value === 'string') {
+      value = value.trim();
+    }
+    const isValid =
+      value !== "" &&
+      value !== null &&
+      value !== false &&
+      value !== undefined &&
+      `${value}` !== 'false';
+      
+    const message = !isValid ? "This field is required" : "";
 
-    isValid = value.trim() !== "" && isValid;
-    if (!isValid) {
-      message = "This field is required";
+    return { isValid, message };
+  },
+
+  email: (value: InputValue, formState: FormControls) => {
+    const isValid = typeof value === 'string' && !!value.match(EMAIL_REGEX);
+    const message = !isValid ? "Enter the correct email" : '';
+
+    return { isValid, message };
+  },
+
+  passwordsMatch: (passKey: string, confirmPassKey: string) =>
+    (value: InputValue, formState: FormControls) => {
+      const isValid = formState[passKey].value === formState[confirmPassKey].value;
+      const message = isValid ? '' : 'Passwords do not match';
+
       return { isValid, message };
     }
-
-    return { isValid, message };
-  },
-
-  email: (value: any, formState: any) => {
-    let isValid = true;
-    isValid = !!value.match(emailValidationPattern) && isValid;
-    const message = !isValid && "Enter the correct email";
-    return { isValid, message };
-  },
-
-  passwordsMatch: (passKey: string, confirmPassKey: string) => (value: any, formState: any) => {
-    const isValid = formState[passKey].value === formState[confirmPassKey].value;
-    const message = isValid ? '' : 'Passwords do not match';
-    
-    return { isValid, message };
-  }
 };
