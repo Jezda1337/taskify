@@ -40,15 +40,15 @@ const initialInputs = {
     validationErrorMessage: "",
     touched: false,
   },
-};
-
-const confirmPasswordInput = {
   confirmPassword: {
     elementType: "text-input",
     type: "password",
     label: "Confirm password",
     value: "",
-    validators: [Validators.required],
+    validators: [
+      Validators.required,
+      Validators.passwordsMatch("password", "confirmPassword"),
+    ],
     required: true,
     valid: false,
     blurred: false,
@@ -59,10 +59,6 @@ const confirmPasswordInput = {
 
 const Register = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
-  const {
-    inputs: { confirmPassword },
-    setInputs: setConfirmInputs,
-  } = useForm(confirmPasswordInput);
 
   return (
     <>
@@ -84,34 +80,12 @@ const Register = () => {
               checkboxHandler={(e: any) => setInputs(!!e.target.checked, key)}
             />
           ))}
-          <MyFormControl
-            type={confirmPassword.type}
-            elementType={confirmPassword.elementType}
-            required={confirmPassword.required}
-            value={confirmPassword.value}
-            label={confirmPassword.label}
-            fullWidth
-            error={
-              confirmPassword.touched &&
-              confirmPassword.blurred &&
-              (confirmPassword.value !== inputs.password.value ||
-                confirmPassword.value === "")
-            }
-            inputHandler={(e: any) =>
-              setConfirmInputs(e.target.value, "confirmPassword")
-            }
-            blurHandler={(e: any) =>
-              setConfirmInputs(e.target.value, "confirmPassword", true)
-            }
-          />
 
           <Button
             type="submit"
             fullWidth
             variant="outlined"
-            disabled={
-              !formIsValid || confirmPassword.value !== inputs.password.value
-            }
+            disabled={!formIsValid}
             className="mt-4"
           >
             Register
