@@ -48,7 +48,6 @@ const Login = () => {
         title="Login"
         btnText="Login"
         inputs={inputs}
-        blur={true}
         setInputs={setInputs}
         formIsValid={formIsValid}
       />

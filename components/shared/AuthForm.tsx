@@ -5,18 +5,16 @@ type props = {
   inputs: any;
   btnText: string;
   title: string;
-  blur: boolean;
   setInputs: any;
   formIsValid: boolean;
 };
 
-export default function({
+export default function ({
   inputs,
   setInputs,
   formIsValid,
   btnText,
   title,
-  blur,
 }: props) {
   return (
     <>
@@ -34,7 +32,7 @@ export default function({
               error={!formCtrl.valid && formCtrl.touched && formCtrl.blurred}
               inputHandler={(e) => setInputs(e.target.value, key)}
               blurHandler={(e) => {
-                setInputs(e.target.value, key, blur);
+                setInputs(e.target.value, key, true);
               }}
               checkboxHandler={(e) => setInputs(!!e.target.checked, key)}
             />

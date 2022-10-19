@@ -68,7 +68,6 @@ const Register = () => {
         formIsValid={formIsValid}
         title="Register"
         btnText="Register"
-        blur={true}
       />
     </>
   );
