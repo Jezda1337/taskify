@@ -1,3 +1,4 @@
+import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { FormControls } from "types/auth/form-controls.type";
@@ -44,13 +45,15 @@ const Login = () => {
 
   return (
     <>
-      <AuthForm
-        title="Login"
-        btnText="Login"
-        inputs={inputs}
-        setInputs={setInputs}
-        formIsValid={formIsValid}
-      />
+      <AuthLayout>
+        <AuthForm
+          title="Login"
+          btnText="Login"
+          inputs={inputs}
+          setInputs={setInputs}
+          formIsValid={formIsValid}
+        />
+      </AuthLayout>
     </>
   );
 };

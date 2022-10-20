@@ -1,3 +1,4 @@
+import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { FormControls } from "types/auth/form-controls.type";
@@ -62,13 +63,15 @@ const Register = () => {
 
   return (
     <>
-      <AuthForm
-        inputs={inputs}
-        setInputs={setInputs}
-        formIsValid={formIsValid}
-        title="Register"
-        btnText="Register"
-      />
+      <AuthLayout>
+        <AuthForm
+          inputs={inputs}
+          setInputs={setInputs}
+          formIsValid={formIsValid}
+          title="Register"
+          btnText="Register"
+        />
+      </AuthLayout>
     </>
   );
 };
