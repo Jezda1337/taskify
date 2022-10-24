@@ -5,3 +5,10 @@
 body {
   transition: background-color 150ms linear;
 }
+
+@layer base {
+  :root {
+    --color-red: #ff0000;
+    --color-primary: #ffc107;
+  }
+}

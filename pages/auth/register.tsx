@@ -1,6 +1,7 @@
 import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
+import Link from "next/link";
 import { FormControls } from "types/auth/form-controls.type";
 import { Validators } from "utils/Validators";
 
@@ -62,17 +63,25 @@ const Register = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
 
   return (
-    <>
+    <div className="flex min-h-screen bg-no-repear bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           inputs={inputs}
           setInputs={setInputs}
           formIsValid={formIsValid}
-          title="Register"
-          btnText="Register"
+          title="Create a new account"
+          btnText="Sign up"
         />
+        <div>
+          <p>
+            Already have an account?{" "}
+            <Link href="/auth/login">
+              <a className="text-primary">Sign in</a>
+            </Link>
+          </p>
+        </div>
       </AuthLayout>
-    </>
+    </div>
   );
 };
 

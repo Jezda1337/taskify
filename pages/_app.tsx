@@ -24,7 +24,7 @@ const darkTheme = createTheme(darkThemeOptions);
 const lightTheme = createTheme(lightThemeOptions);
 
 const MyApp: React.FC<MyAppProps> = (props) => {
-  const [isDark, setIsDark] = React.useState(false);
+  const [isDark, setIsDark] = React.useState(true);
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
