@@ -1,13 +1,13 @@
 import { IncomingMessage } from 'http';
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import { UserDocument } from 'server/interfaces/user/user-document.interface';
+import { UserProfile } from 'types/auth/user-profile.type';
 import { axiosSSR } from './axios';
 
 type QueryResponse<T> = [error: string | null, data: T | null]
 interface GetPropsParams {
   context: GetServerSidePropsContext;
   fetcher: <T>(url: string) => Promise<QueryResponse<T>>;
-  user: UserDocument;
+  user: UserProfile;
 }
 
 export const withAuthSSR = <T>(
@@ -16,7 +16,7 @@ export const withAuthSSR = <T>(
   const getServerSideProps: GetServerSideProps = async context => {
     const fetcher = <T>(url: string) => fetcherSSR<T>(context.req, url);
     // GET USER
-    const [error, user] = await fetcher<UserDocument>(`/auth/me`);
+    const [error, user] = await fetcher<UserProfile>(`/auth/me`);
     if (error || !user) return { redirect: { statusCode: 307, destination: '/auth/login' } };
     // GET PROPS
     const result = getProps ? await getProps({ context, fetcher, user }) : {};

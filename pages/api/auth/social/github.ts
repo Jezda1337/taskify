@@ -8,7 +8,7 @@ import { createGithubUser, createUser, getUserByGithubId } from 'server/services
 import { v4 as uuidv4 } from 'uuid';
 import { getGithubUser } from 'server/adapters/github-adapter';
 import { WithId } from 'mongodb';
-import { UserDocument } from 'server/interfaces/user/user-document.interface';
+import { UserProfile } from 'types/auth/user-profile.type';
 
 interface NextApiRegisterRequest extends NextApiRequest {
   body: RegisterReq;
@@ -17,7 +17,7 @@ interface NextApiRegisterRequest extends NextApiRequest {
 const handler: NextApiHandler = async (req, res) => {
   const { code } = req.query;
   const githubUser = await getGithubUser(code as string);
-  let user: WithId<UserDocument> | UserDocument | null = await getUserByGithubId(githubUser.id);
+  let user: WithId<UserProfile> | UserProfile | null = await getUserByGithubId(githubUser.id);
   if (!user) {
     const githubUserBody = {
       id: uuidv4(),

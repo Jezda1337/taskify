@@ -32,7 +32,7 @@ export async function incrementTokenVersion(id: string) {
 }
 
 export async function getUserById(id: string) {
-  const user: UserDocument | null = await User.findOne({ id }, { password: 0 });
+  const user: Omit<UserDocument, 'password'> | null = await User.findOne({ id }, { password: 0 });
   return user;
 }
 
@@ -42,6 +42,6 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getUserByGithubId(githubId: string) {
-  const user: UserDocument | null = await User.findOne({ githubId });
+  const user: Omit<UserDocument, 'password'> | null = await User.findOne({ githubId });
   return user;
 }
