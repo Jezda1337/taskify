@@ -7,7 +7,7 @@ import { RefreshTokenPayload } from "server/interfaces/token/refresh-token-paylo
 import { RefreshToken } from "server/interfaces/token/refresh-token.interface";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
-import { setCookie, deleteCookie, getCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET!;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET!;
@@ -60,11 +60,7 @@ export function verifyRefreshToken(token: string) {
 }
 
 export function verifyAccessToken(token: string) {
-  try {
-    return jwt.verify(token, accessTokenSecret) as AccessToken;
-  } catch (error) {
-    console.log(error);
-  }
+  return jwt.verify(token, accessTokenSecret) as AccessToken;
 }
 
 export function refreshTokens(currentRefreshToken: RefreshToken, tokenVersion: number) {

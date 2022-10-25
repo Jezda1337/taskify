@@ -20,6 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
   let user: WithId<UserDocument> | UserDocument | null = await getUserByGithubId(githubUser.id);
   if (!user) {
     const githubUserBody = {
+      id: uuidv4(),
       fullname: githubUser.name,
       email: githubUser.email,
       githubUserId: githubUser.id,
