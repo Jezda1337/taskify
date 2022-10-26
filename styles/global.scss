@@ -12,3 +12,12 @@ body {
     --color-primary: #ffc107;
   }
 }
+
+.fade-scale-in {
+  animation: fade-scale-in 250ms ease-in;
+}
+@keyframes fade-scale-in {
+  0%{opacity:0; transform:scale(0.97);}
+  50%{transform:scale(1.03);}
+  100%{opacity:1;transform:scale(1);}
+}

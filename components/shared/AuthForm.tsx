@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import MyFormControl from "./MyFormControl";
 
-type props = {
+type Props = {
   inputs: any;
   btnText: string;
   title: string;
@@ -15,7 +15,7 @@ export default function ({
   formIsValid,
   btnText,
   title,
-}: props) {
+}: Props) {
   return (
     <>
       <h3 className="text-2xl mb-8">{title}</h3>
