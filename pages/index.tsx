@@ -8,7 +8,6 @@ export default function Home() {
 
   const logout = () => {
     axiosClient("/auth/logout").then((res) => {
-      console.log("logged out");
       router.replace("/auth/login");
     });
   };

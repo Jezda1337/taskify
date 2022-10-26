@@ -5,3 +5,19 @@
 body {
   transition: background-color 150ms linear;
 }
+
+@layer base {
+  :root {
+    --color-red: #ff0000;
+    --color-primary: #ffc107;
+  }
+}
+
+.fade-scale-in {
+  animation: fade-scale-in 250ms ease-in;
+}
+@keyframes fade-scale-in {
+  0%{opacity:0; transform:scale(0.97);}
+  50%{transform:scale(1.03);}
+  100%{opacity:1;transform:scale(1);}
+}

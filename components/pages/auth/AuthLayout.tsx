@@ -1,7 +1,9 @@
 import { Button } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+// import LoginIcon from '@mui/icons-material/Login';
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 const AuthLayout = ({ children }: Props) => {
@@ -11,18 +13,23 @@ const AuthLayout = ({ children }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 max-w-md m-auto ">
-        {children}
-        <div className="mt-4 text-center">or login with</div>
-        <Button
-          fullWidth
-          variant="outlined"
-          className="mt-4"
-          component={"a"}
-          href={gitHubUrl}
-        >
-          Github
-        </Button>
+      <div className="flex w-full ">
+        <div className="flex flex-1 justify-center">
+          <div className="fade-scale-in max-w-[450px] min-w-[200px] w-full flex flex-col justify-center items-center min-h-screen sm:min-h-0 m-auto px-6 py-12 rounded-md backdrop-blur-lg bg-black/70">
+            {children}
+            <hr className="w-full border-primary" />
+            <div className="mt-4 text-center">or sign in with</div>
+            <Button
+              variant="outlined"
+              className="mt-4"
+              component={"a"}
+              href={gitHubUrl}
+              startIcon={<GitHubIcon />}
+            >
+              Github
+            </Button>
+          </div>
+        </div>
       </div>
     </>
   );

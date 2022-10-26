@@ -40,9 +40,9 @@ export default function ({
         <Button
           type="submit"
           fullWidth
-          variant="outlined"
+          variant="contained"
           disabled={!formIsValid}
-          className="mt-4"
+          className="mt-4 "
         >
           {btnText}
         </Button>
