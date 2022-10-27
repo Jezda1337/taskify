@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
-  const logout = () => {
-    axiosClient("/auth/logout").then((res) => {
-      router.replace("/auth/login");
-    });
+  const logout = async () => {
+    await axiosClient("/auth/logout");
+    router.replace("/auth/login");
   };
+  
   return (
     <>
       <h1>Taskify</h1>
@@ -20,4 +20,4 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps =  withAuthSSR()
+export const getServerSideProps = withAuthSSR();
