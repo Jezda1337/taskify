@@ -3,6 +3,7 @@ import withMongo from "server/middleware/withMongo";
 import { buildTokens, setTokens } from "server/services/token.service";
 import { getUserByEmail } from "server/services/user.service";
 import { LoginReq } from "types/auth/login-req.type";
+import bcrypt from 'bcrypt';
 
 interface NextApiLoginRequest extends NextApiRequest {
   body: LoginReq;
@@ -24,6 +25,12 @@ const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
     if (user) {
       const { accessToken, refreshToken } = buildTokens(user);
       setTokens(req, res, accessToken, refreshToken);
+
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      !validPassword && res.status(400).json("Incorrect password");
 
       const { id, fullname, email, avatar } = user;
       res.status(200).json({ id, fullname, email, avatar });
