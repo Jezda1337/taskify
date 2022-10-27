@@ -2,6 +2,7 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
+import { preventAuth } from "middleware/preventAuth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
@@ -76,3 +77,5 @@ const Login = () => {
 };
 
 export default Login;
+
+export const getServerSideProps = preventAuth();
