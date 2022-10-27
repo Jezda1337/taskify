@@ -10,10 +10,10 @@ interface NextApiLoginRequest extends NextApiRequest {
 
 const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
   if (req.method !== "POST") {
-    res.status(500).json({ message: "Only POST requests here!" })
+    res.status(500).json({ message: "Only POST requests here!" });
   }
 
-  const { email, password, rememberMe } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     res.status(400).json({ message: "Please fill in all fields!" });
@@ -24,13 +24,12 @@ const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
     if (user) {
       const { accessToken, refreshToken } = buildTokens(user);
       setTokens(req, res, accessToken, refreshToken);
-      
+
       const { id, fullname, email, avatar } = user;
       res.status(200).json({ id, fullname, email, avatar });
     } else {
       res.status(500).json({ message: "Failed to log in!" });
     }
-
   } catch (error: any) {
     res.status(500).json(error);
   }
