@@ -1,8 +1,13 @@
 import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
+import { axiosClient } from "middleware/axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
+import { RegisterReq } from "types/auth/register-req.type";
+import { RegisterUserBody } from "types/auth/register-user-body.interface";
+import { createBody } from "utils/helpers";
 import { Validators } from "utils/Validators";
 
 const initialInputs: FormControls = {
@@ -61,6 +66,18 @@ const initialInputs: FormControls = {
 
 const Register = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const registerBody = createBody(inputs) as RegisterReq;
+    try {
+      await axiosClient.post("/auth/register", registerBody);
+      router.replace("/");
+    } catch (err) {
+      console.log(err); //needs to replace with snackbar
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-no-repear bg-cover bg-[url('/images/blob.svg')]">
@@ -71,6 +88,7 @@ const Register = () => {
           formIsValid={formIsValid}
           title="Create a new account"
           btnText="Sign up"
+          handleSubmit={handleSubmit}
         />
         <div>
           <p>

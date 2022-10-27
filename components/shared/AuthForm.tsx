@@ -7,6 +7,7 @@ type Props = {
   title: string;
   setInputs: any;
   formIsValid: boolean;
+  handleSubmit: any;
 };
 
 export default function ({
@@ -15,12 +16,16 @@ export default function ({
   formIsValid,
   btnText,
   title,
+  handleSubmit,
 }: Props) {
   return (
     <>
       <h3 className="text-2xl mb-8">{title}</h3>
 
-      <form className="w-full flex flex-col gap-4 justify-center ">
+      <form
+        className="w-full flex flex-col gap-4 justify-center"
+        onSubmit={handleSubmit}
+      >
         {Object.entries(inputs).map(([key, formCtrl]: any) => (
           <MyFormControl
             type={formCtrl.type}
