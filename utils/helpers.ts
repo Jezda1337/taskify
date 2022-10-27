@@ -8,10 +8,21 @@ export const checkValidity = (
   validators: Validator[],
   formState: FormControls
 ): Validity => {
-  const validField = { isValid: true, message: "", };
+  const validField = { isValid: true, message: "" };
   const invalidField = validators
     .map((validator) => validator(value, formState))
     .find((field) => !field.isValid);
 
   return invalidField || validField;
+};
+
+export const createBody = (
+  inputs: FormControls
+): { [key: string]: InputValue } => {
+  const body: any = {};
+  for (let key in inputs) {
+    body[key] = inputs[key].value;
+  }
+
+  return body as { [key: string]: InputValue };
 };

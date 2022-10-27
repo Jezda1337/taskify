@@ -1,8 +1,12 @@
 import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
+import { axiosClient } from "middleware/axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
+import { LoginReq } from "types/auth/login-req.type";
+import { createBody } from "utils/helpers";
 import { Validators } from "utils/Validators";
 
 const initialInputs: FormControls = {
@@ -34,6 +38,18 @@ const initialInputs: FormControls = {
 
 const Login = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const loginBody = createBody(inputs) as LoginReq;
+    try {
+      await axiosClient.post("/auth/login", loginBody);
+      router.replace("/");
+    } catch (err) {
+      console.log(err); //needs to replace with snackbar
+    }
+  };
 
   return (
     <div className="flex min-h-screen bg-no-repeat bg-cover bg-[url('/images/blob.svg')]">
@@ -44,6 +60,7 @@ const Login = () => {
           inputs={inputs}
           setInputs={setInputs}
           formIsValid={formIsValid}
+          handleSubmit={handleSubmit}
         />
         <div>
           <p>
