@@ -53,7 +53,6 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-no-repeat bg-center bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           title="Welcome back"
@@ -72,7 +71,6 @@ const Login = () => {
           </p>
         </div>
       </AuthLayout>
-    </div>
   );
 };
 

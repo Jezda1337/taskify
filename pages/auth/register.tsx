@@ -81,7 +81,6 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-no-repeat bg-center bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           inputs={inputs}
@@ -100,7 +99,6 @@ const Register = () => {
           </p>
         </div>
       </AuthLayout>
-    </div>
   );
 };
 

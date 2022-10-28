@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
   initialDark = localStorage.getItem("theme") === "dark";
 }
 
-export function useDarkMode(isDark: boolean): [boolean, (val: boolean) => void] {
+export function useDarkMode(isDark: boolean | null): [boolean | null, (val: boolean) => void] {
   const [dark, setDark] = useState(isDark);
 
   useEffect(() => {
