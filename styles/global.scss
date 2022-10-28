@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
   transition: background-color 150ms linear;
 }
 
@@ -20,4 +25,15 @@ body {
   0%{opacity:0; transform:scale(0.97);}
   50%{transform:scale(1.03);}
   100%{opacity:1;transform:scale(1);}
+}
+
+.fade-out {
+  animation: fade-out 500ms ease-in 200ms;
+  pointer-events: none;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+@keyframes fade-out {
+  0%{opacity:1;}
+  100%{opacity:0;}
 }

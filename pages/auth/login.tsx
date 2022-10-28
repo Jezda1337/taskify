@@ -2,7 +2,7 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
-import { preventAuth } from "middleware/preventAuth";
+import { protectAuth } from "middleware/protectAuth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-no-repeat bg-cover bg-[url('/images/blob.svg')]">
+    <div className="flex min-h-screen bg-no-repeat bg-center bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           title="Welcome back"
@@ -78,4 +78,4 @@ const Login = () => {
 
 export default Login;
 
-export const getServerSideProps = preventAuth();
+export const getServerSideProps = protectAuth();

@@ -2,9 +2,9 @@ import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { ChangeEvent, FocusEvent } from "react";
-import { FormControl as MyFormControl } from "types/auth/form-control.type";
+import { FormControl as MyFormControlType } from "types/auth/form-control.type";
 
-type MyControlProps = Partial<MyFormControl> & {
+type MyControlProps = Partial<MyFormControlType> & {
   inputHandler?: (e: ChangeEvent<HTMLInputElement>) => void;
   blurHandler?: (e: FocusEvent<HTMLInputElement>) => void;
   checkboxHandler?: (e: ChangeEvent<HTMLInputElement>) => void;
