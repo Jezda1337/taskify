@@ -16,6 +16,7 @@ import createEmotionCache from "../utility/createEmotionCache";
 import darkThemeOptions from "../styles/theme/darkThemeOptions";
 import lightThemeOptions from "../styles/theme/lightThemeOptions";
 import "../styles/global.scss";
+import Layout from "../components/shared/layout/Layout";
 
 type MyAppProps = AppProps & { emotionCache?: EmotionCache };
 
@@ -31,7 +32,9 @@ const MyApp: React.FC<MyAppProps> = (props) => {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </CacheProvider>
   );
