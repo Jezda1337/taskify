@@ -2,6 +2,7 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
+import { protectAuth } from "middleware/protectAuth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
@@ -80,7 +81,6 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-no-repear bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           inputs={inputs}
@@ -99,8 +99,9 @@ const Register = () => {
           </p>
         </div>
       </AuthLayout>
-    </div>
   );
 };
 
 export default Register;
+
+export const getServerSideProps = protectAuth();

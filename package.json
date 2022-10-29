@@ -33,6 +33,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.10.5",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.2.0",
     "@testing-library/user-event": "14.2.0",

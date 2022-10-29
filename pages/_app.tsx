@@ -16,6 +16,12 @@ import createEmotionCache from "../utility/createEmotionCache";
 import darkThemeOptions from "../styles/theme/darkThemeOptions";
 import lightThemeOptions from "../styles/theme/lightThemeOptions";
 import "../styles/global.scss";
+import { useDarkMode } from "hooks/useDarkMode";
+import ThemeContext from "context/theme-context";
+import Head from "next/head";
+import Script from "next/script";
+import Link from "next/link";
+import PageLoader from "@/components/shared/PageLoader";
 
 type MyAppProps = AppProps & { emotionCache?: EmotionCache };
 
@@ -23,17 +29,24 @@ const clientSideEmotionCache = createEmotionCache();
 const darkTheme = createTheme(darkThemeOptions);
 const lightTheme = createTheme(lightThemeOptions);
 
-const MyApp: React.FC<MyAppProps> = (props) => {
-  const [isDark, setIsDark] = React.useState(true);
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+const MyApp: React.FC<MyAppProps> = (props) => {
+  const [dark, setDark] = useDarkMode(null);
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  
   return (
-    <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
+    <>
+      <Script src="/noflash.js" strategy="beforeInteractive" />
+      <ThemeContext.Provider value={{ dark, setDark }}>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={dark ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <PageLoader />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </CacheProvider>
+      </ThemeContext.Provider>
+    </>
   );
 };
 

@@ -31,27 +31,20 @@ export function buildTokens(user: { id: string, fullname: string, tokenVersion: 
 }
 
 const isProduction = process.env.NODE_ENV === "production";
-const defaultCookieOptions: CookieOptions = {
+const cookieOptions: CookieOptions = {
   httpOnly: true,
   secure: isProduction,
   sameSite: isProduction ? "strict" : "lax",
   domain: process.env.BASE_DOMAIN,
   path: "/",
-};
-const accessTokenCookieOptions: CookieOptions = {
-  ...defaultCookieOptions,
   maxAge: TokenExpiration.Access * 1000,
-};
-const refreshTokenCookieOptions: CookieOptions = {
-  ...defaultCookieOptions,
-  maxAge: TokenExpiration.Refresh * 1000,
 };
 
 export function setTokens(req: NextApiRequest, res: NextApiResponse, accessToken: string, refreshToken?: string) {
-  setCookie(Cookies.AccessToken, accessToken, { req, res, ...accessTokenCookieOptions });
+  setCookie(Cookies.AccessToken, accessToken, { req, res, ...cookieOptions });
 
   if (refreshToken) {
-    setCookie(Cookies.RefreshToken, refreshToken, { req, res, ...refreshTokenCookieOptions });
+    setCookie(Cookies.RefreshToken, refreshToken, { req, res, ...cookieOptions });
   }
 }
 
@@ -60,7 +53,11 @@ export function verifyRefreshToken(token: string) {
 }
 
 export function verifyAccessToken(token: string) {
-  return jwt.verify(token, accessTokenSecret) as AccessToken;
+  try {
+    return jwt.verify(token, accessTokenSecret) as AccessToken;
+  } catch (error) {
+    console.log('error: ', error);
+  }
 }
 
 export function refreshTokens(currentRefreshToken: RefreshToken, tokenVersion: number) {
