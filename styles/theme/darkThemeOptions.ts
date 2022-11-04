@@ -5,7 +5,14 @@ const darkThemeOptions: ThemeOptions = {
   palette: {
     mode: "dark",
     primary: amber,
+    background: {
+      default: "#000000",
+      paper: "#121212",
+    }
   },
+  zIndex:{
+    drawer: 40
+  }
 };
 
 export default darkThemeOptions;

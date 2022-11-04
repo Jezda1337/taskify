@@ -5,7 +5,17 @@ const lightThemeOptions: ThemeOptions  = {
   palette: {
     mode: 'light',
     primary: amber,
+    background: {
+      default: "#FFFFFF",
+      paper: "#f5f5f5",
+    },
+    // text: {
+    //   primary: '#000000'
+    // }
   },
+  zIndex:{
+    drawer: 40
+  }
 };
 
 export default lightThemeOptions;

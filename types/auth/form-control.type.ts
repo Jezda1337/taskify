@@ -5,6 +5,7 @@ export type FormControl = {
   elementType: string;
   type?: string;
   label: string;
+  placeholder?: string;
   value: InputValue;
   validators: Validator[];
   required: boolean;

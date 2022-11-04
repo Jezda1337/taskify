@@ -1,5 +1,4 @@
 import { NextApiHandler } from "next";
-import { withAuth } from "server/middleware/withAuth";
 import withMongo from "server/middleware/withMongo";
 import { clearTokens } from "server/services/token.service";
 
@@ -11,4 +10,4 @@ const handler: NextApiHandler = (req, res) => {
   res.end();
 };
 
-export default withAuth(withMongo(handler));
+export default withMongo(handler);

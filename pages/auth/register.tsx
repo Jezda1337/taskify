@@ -2,11 +2,11 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
+import { withNoAuthSSR } from "middleware/withNoAuthSSR";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
 import { RegisterReq } from "types/auth/register-req.type";
-import { RegisterUserBody } from "types/auth/register-user-body.interface";
 import { createBody } from "utils/helpers";
 import { Validators } from "utils/Validators";
 
@@ -80,7 +80,6 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-no-repear bg-cover bg-[url('/images/blob.svg')]">
       <AuthLayout>
         <AuthForm
           inputs={inputs}
@@ -99,8 +98,9 @@ const Register = () => {
           </p>
         </div>
       </AuthLayout>
-    </div>
   );
 };
 
 export default Register;
+
+export const getServerSideProps = withNoAuthSSR();

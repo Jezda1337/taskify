@@ -26,3 +26,10 @@ export const createBody = (
 
   return body as { [key: string]: InputValue };
 };
+
+export const isActive = (linkPath: string, currentUrl: string, exact?: boolean): boolean => {
+  const isExact = (currentUrl === linkPath && linkPath.length > 1) || (currentUrl === "/" && currentUrl === linkPath);
+  const startsWith = (currentUrl.startsWith(linkPath) && linkPath.length > 1) || (currentUrl === "/" && currentUrl === linkPath);
+
+  return exact ? isExact : startsWith;
+}
