@@ -25,6 +25,7 @@ const MyFormControl = (props: MyControlProps) => {
             onChange={props.inputHandler}
             onBlur={props.blurHandler}
             label={props.label}
+            placeholder={props.placeholder}
             color="primary"
             required={props.required}
             spellCheck="false"
@@ -44,6 +45,7 @@ const MyFormControl = (props: MyControlProps) => {
             onChange={props.inputHandler}
             onBlur={props.blurHandler}
             label={props.label}
+            placeholder={props.placeholder}
             color="primary"
             multiline
             minRows={4}

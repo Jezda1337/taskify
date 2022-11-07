@@ -49,14 +49,18 @@ export function setTokens(req: NextApiRequest, res: NextApiResponse, accessToken
 }
 
 export function verifyRefreshToken(token: string) {
-  return jwt.verify(token, refreshTokenSecret) as RefreshToken;
+  try {
+    return jwt.verify(token, refreshTokenSecret) as RefreshToken;
+  } catch (error) {
+    console.log('verifyRefreshToken error: ', error);
+  }
 }
 
 export function verifyAccessToken(token: string) {
   try {
     return jwt.verify(token, accessTokenSecret) as AccessToken;
   } catch (error) {
-    console.log('error: ', error);
+    console.log('verifyAccessToken error: ', error);
   }
 }
 

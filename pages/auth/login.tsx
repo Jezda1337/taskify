@@ -2,7 +2,7 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
-import { protectAuth } from "middleware/protectAuth";
+import { withNoAuthSSR } from "middleware/withNoAuthSSR";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
@@ -76,4 +76,4 @@ const Login = () => {
 
 export default Login;
 
-export const getServerSideProps = protectAuth();
+export const getServerSideProps = withNoAuthSSR();

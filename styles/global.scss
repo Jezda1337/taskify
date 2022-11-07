@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-red: #ff0000;
+    --color-primary: #ffc107;
+  }
+}
+
+@layer components {
+  .glass-bg {
+    @apply backdrop-blur-lg bg-white/90 dark:bg-black/70
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -11,20 +24,31 @@ html, body {
   transition: background-color 150ms linear;
 }
 
-@layer base {
-  :root {
-    --color-red: #ff0000;
-    --color-primary: #ffc107;
-  }
+a {
+  color: inherit;
+  text-decoration: none; /* no underline */
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade-in 250ms ease-in;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+@keyframes fade-in {
+  0%{opacity:0;}
+  100%{opacity:1;}
 }
 
 .fade-scale-in {
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
   animation: fade-scale-in 250ms ease-in;
 }
 @keyframes fade-scale-in {
   0%{opacity:0; transform:scale(0.97);}
   50%{transform:scale(1.03);}
-  100%{opacity:1;transform:scale(1);}
+  100%{opacity:1; transform:scale(1);}
 }
 
 .fade-out {

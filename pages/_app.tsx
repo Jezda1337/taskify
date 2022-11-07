@@ -16,36 +16,60 @@ import createEmotionCache from "../utility/createEmotionCache";
 import darkThemeOptions from "../styles/theme/darkThemeOptions";
 import lightThemeOptions from "../styles/theme/lightThemeOptions";
 import "../styles/global.scss";
+import Layout from "../components/shared/layout/Layout";
 import { useDarkMode } from "hooks/useDarkMode";
-import ThemeContext from "context/theme-context";
-import Head from "next/head";
+import NavContext from "context/nav-context";
 import Script from "next/script";
-import Link from "next/link";
 import PageLoader from "@/components/shared/PageLoader";
+import { UserProfile } from "types/auth/user-profile.type";
+import Head from "next/head";
+import { useRouteLoading } from "hooks/useRouteLoading";
+import LinearProgress from "@mui/material/LinearProgress";
 
-type MyAppProps = AppProps & { emotionCache?: EmotionCache };
+type MyAppProps = AppProps & {
+  emotionCache?: EmotionCache;
+  pageProps: { user?: UserProfile };
+};
 
 const clientSideEmotionCache = createEmotionCache();
 const darkTheme = createTheme(darkThemeOptions);
 const lightTheme = createTheme(lightThemeOptions);
 
-
 const MyApp: React.FC<MyAppProps> = (props) => {
   const [dark, setDark] = useDarkMode(null);
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  
+  const isRouteLoading = useRouteLoading();
+  const {
+    Component,
+    emotionCache = clientSideEmotionCache,
+    pageProps: { user, ...otherProps },
+  } = props;
+
+  React.useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+  }, [user]);
+
   return (
     <>
+      <Head>
+        <title>Taskify</title>
+      </Head>
       <Script src="/noflash.js" strategy="beforeInteractive" />
-      <ThemeContext.Provider value={{ dark, setDark }}>
+      <NavContext.Provider value={{ dark, setDark, user }}>
         <CacheProvider value={emotionCache}>
           <ThemeProvider theme={dark ? darkTheme : lightTheme}>
             <CssBaseline />
             <PageLoader />
-            <Component {...pageProps} />
+            {isRouteLoading ? (
+              <LinearProgress className="fixed top-0 left-0 right-0 z-[1000]" />
+            ) : null}
+            <Layout>
+              <Component {...otherProps} />
+            </Layout>
           </ThemeProvider>
         </CacheProvider>
-      </ThemeContext.Provider>
+      </NavContext.Provider>
     </>
   );
 };

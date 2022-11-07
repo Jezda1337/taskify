@@ -2,12 +2,11 @@ import AuthLayout from "@/components/pages/auth/AuthLayout";
 import AuthForm from "@/components/shared/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
-import { protectAuth } from "middleware/protectAuth";
+import { withNoAuthSSR } from "middleware/withNoAuthSSR";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormControls } from "types/auth/form-controls.type";
 import { RegisterReq } from "types/auth/register-req.type";
-import { RegisterUserBody } from "types/auth/register-user-body.interface";
 import { createBody } from "utils/helpers";
 import { Validators } from "utils/Validators";
 
@@ -104,4 +103,4 @@ const Register = () => {
 
 export default Register;
 
-export const getServerSideProps = protectAuth();
+export const getServerSideProps = withNoAuthSSR();
