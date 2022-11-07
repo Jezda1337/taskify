@@ -11,7 +11,7 @@ export default function (initialInputs: FormControls) {
   const [inputs, setInputs] = useState(initialInputs);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const inputHandler : (value: InputValue, currentInputKey: keyof FormControls, blurred?: boolean) => void = useCallback(
+  const inputHandler : InputHandler = useCallback(
     (
       value: InputValue,
       currentInputKey: keyof FormControls,

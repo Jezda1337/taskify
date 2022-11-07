@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { InputHandler } from "hooks/useForm";
 import { FormControls } from "types/shared/form-controls.type";
-import MyFormControl from "./MyFormControl";
+import MyFormControl from "../../shared/MyFormControl";
 
 type Props = {
   inputs: FormControls;

@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/pages/auth/AuthLayout";
-import AuthForm from "@/components/shared/AuthForm";
+import AuthForm from "@/components/pages/auth/AuthForm";
 import useForm from "hooks/useForm";
 import { axiosClient } from "middleware/axios";
 import { withNoAuthSSR } from "middleware/withNoAuthSSR";
