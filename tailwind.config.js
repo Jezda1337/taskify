@@ -9,7 +9,6 @@ module.exports = {
     extend: {},
     colors: {
       ...colors,
-      test: "var(--color-red)",
       primary: "var(--color-primary)",
     },
   },
