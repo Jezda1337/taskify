@@ -9,9 +9,6 @@ const lightThemeOptions: ThemeOptions  = {
       default: "#FFFFFF",
       paper: "#f5f5f5",
     },
-    // text: {
-    //   primary: '#000000'
-    // }
   },
   zIndex:{
     drawer: 40

@@ -46,7 +46,6 @@ const DrawerMobile = () => {
 
   const handleScroll = useCallback(
     (e: Event) => {
-      console.log("scrolling");
       if (y > window.scrollY) {
         setHide(false);
       } else if (y < window.scrollY) {
