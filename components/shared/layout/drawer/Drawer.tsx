@@ -39,6 +39,7 @@ const StyledDrawer = styled(MuiDrawer, {
     width: open ? openDrawerWidth : closedDrawerWidth,
     overflowX: "hidden",
     maxWidth: 500,
+    scrollbarWidth: "thin",
     ...(open ? { ...openedMixin(theme) } : { ...closedMixin(theme) }),
   },
   whiteSpace: "nowrap",
@@ -52,8 +53,12 @@ const Drawer = ({ open }: DrawerProps) => {
   return (
     <>
       <EmptyDrawer open={open} />
-      <StyledDrawer variant="permanent" open={open} >
-        { open ? <DrawerExpandedItems /> : <DrawerCollapsedItems direction="column" /> }
+      <StyledDrawer variant="permanent" open={open}>
+        {open ? (
+          <DrawerExpandedItems />
+        ) : (
+          <DrawerCollapsedItems direction="column" />
+        )}
       </StyledDrawer>
     </>
   );
