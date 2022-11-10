@@ -23,7 +23,7 @@ const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
   try {
     const user = await getUserByEmail(email);
     if (user) {
-      const { accessToken, refreshToken } = buildTokens(user);
+      const { accessToken, refreshToken } = buildTokens(user._id, user.tokenVersion);
       setTokens(req, res, accessToken, refreshToken);
 
       const validPassword = await bcrypt.compare(

@@ -36,7 +36,7 @@ const handler: NextApiHandler = async (req: NextApiRegisterRequest, res) => {
 
     const user = await createUser(userBody);
     if (user) {
-      const { accessToken, refreshToken } = buildTokens(user);
+      const { accessToken, refreshToken } = buildTokens(user._id, user.tokenVersion);
       setTokens(req, res, accessToken, refreshToken);
       return res.status(200).json(user);
     }

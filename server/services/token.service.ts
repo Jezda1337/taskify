@@ -20,9 +20,9 @@ function signRefreshToken(payload: RefreshTokenPayload) {
   return jwt.sign(payload, refreshTokenSecret, { expiresIn: TokenExpiration.Refresh });
 }
 
-export function buildTokens(user: { _id: string, fullname: string, tokenVersion: number }) {
-  const accessPayload: AccessTokenPayload = { userId: user._id };
-  const refreshPayload: RefreshTokenPayload = { userId: user._id!, version: user.tokenVersion! };
+export function buildTokens(_id: string, tokenVersion: number) {
+  const accessPayload: AccessTokenPayload = { userId: _id };
+  const refreshPayload: RefreshTokenPayload = { userId: _id!, version: tokenVersion! };
 
   const accessToken = signAccessToken(accessPayload);
   const refreshToken = refreshPayload && signRefreshToken(refreshPayload);

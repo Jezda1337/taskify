@@ -21,7 +21,7 @@ const handler: NextApiHandler = async (req, res) => {
     user = await createGithubUser(githubUserBody);
   }
 
-  const { accessToken, refreshToken } = buildTokens(user);
+  const { accessToken, refreshToken } = buildTokens(user._id, user.tokenVersion);
   setTokens(req, res, accessToken, refreshToken);
 
   res.redirect(`${process.env.CLIENT_URL}`);
