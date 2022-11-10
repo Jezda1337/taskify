@@ -1,15 +1,17 @@
 import { useCallback, useState } from "react";
 import { checkValidity } from "utils/helpers";
 import cloneDeep from 'lodash.clonedeep';
-import { FormControls } from "types/auth/form-controls.type";
-import { FormControl } from "types/auth/form-control.type";
+import { FormControls } from "types/shared/form-controls.type";
+import { FormControl } from "types/shared/form-control.type";
 import { InputValue } from "types/shared/input-value.type";
+
+export type InputHandler = (value: InputValue, currentInputKey: keyof FormControls, blurred?: boolean) => void
 
 export default function (initialInputs: FormControls) {
   const [inputs, setInputs] = useState(initialInputs);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const inputHandler = useCallback(
+  const inputHandler : InputHandler = useCallback(
     (
       value: InputValue,
       currentInputKey: keyof FormControls,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import useForm from "hooks/useForm";
-import { FormControls } from "types/auth/form-controls.type";
+import { FormControls } from "types/shared/form-controls.type";
 import { Validators } from "utils/Validators";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -35,7 +35,7 @@ const SearchBarMenu = () => {
         className="w-[470px] hidden md:flex items-end justify-center "
         onSubmit={handleSubmit}
       >
-        {Object.entries(inputs).map(([key, formCtrl]: any) => (
+        {Object.entries(inputs).map(([key, formCtrl]) => (
           <TextField
             key={key}
             fullWidth

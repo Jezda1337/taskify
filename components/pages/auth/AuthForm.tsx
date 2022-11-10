@@ -1,13 +1,15 @@
 import { Button } from "@mui/material";
-import MyFormControl from "./MyFormControl";
+import { InputHandler } from "hooks/useForm";
+import { FormControls } from "types/shared/form-controls.type";
+import MyFormControl from "../../shared/MyFormControl";
 
 type Props = {
-  inputs: any;
+  inputs: FormControls;
   btnText: string;
   title: string;
-  setInputs: any;
+  setInputs: InputHandler;
   formIsValid: boolean;
-  handleSubmit: any;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<unknown>;
 };
 
 export default function ({
@@ -26,7 +28,7 @@ export default function ({
         className="w-full flex flex-col gap-4 justify-center"
         onSubmit={handleSubmit}
       >
-        {Object.entries(inputs).map(([key, formCtrl]: any) => (
+        {Object.entries(inputs).map(([key, formCtrl]) => (
           <MyFormControl
             type={formCtrl.type}
             key={key}

@@ -1,4 +1,4 @@
-import { FormControls } from "types/auth/form-controls.type";
+import { FormControls } from "types/shared/form-controls.type";
 import { InputValue } from "types/shared/input-value.type";
 import { EMAIL_REGEX } from "./constants";
 
@@ -14,19 +14,17 @@ export const Validators = {
       value !== false &&
       value !== undefined &&
       `${value}` !== 'false';
-      
+
     const message = !isValid ? "This field is required" : "";
 
     return { isValid, message };
   },
-
   email: (value: InputValue, formState: FormControls) => {
     const isValid = typeof value === 'string' && !!value.match(EMAIL_REGEX);
     const message = !isValid ? "Enter the correct email" : '';
 
     return { isValid, message };
   },
-
   passwordsMatch: (passKey: string, confirmPassKey: string) =>
     (value: InputValue, formState: FormControls) => {
       const isValid = formState[passKey].value === formState[confirmPassKey].value;

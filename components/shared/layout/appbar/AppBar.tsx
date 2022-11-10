@@ -34,7 +34,7 @@ const AppBar = ({ toggleDrawer }: AppBarProps) => {
         position="fixed"
         color="transparent"
         elevation={0}
-        className="glass-bg"
+        className="bg-glass"
       >
         <Toolbar style={{ width: "100vw" }}>
           <IconButton
