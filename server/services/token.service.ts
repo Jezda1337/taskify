@@ -22,7 +22,7 @@ function signRefreshToken(payload: RefreshTokenPayload) {
 
 export function buildTokens(_id: string, tokenVersion: number) {
   const accessPayload: AccessTokenPayload = { userId: _id };
-  const refreshPayload: RefreshTokenPayload = { userId: _id!, version: tokenVersion! };
+  const refreshPayload: RefreshTokenPayload = { userId: _id, version: tokenVersion };
 
   const accessToken = signAccessToken(accessPayload);
   const refreshToken = refreshPayload && signRefreshToken(refreshPayload);
