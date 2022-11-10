@@ -1,10 +1,7 @@
 import mongoose from 'mongoose';
+import { UserDocument } from 'server/interfaces/user/user-document.interface';
 
-const UserSchema = new mongoose.Schema({
-  id: { 
-    type: String, 
-    unique: true,
-  },
+const UserSchema = new mongoose.Schema<UserDocument>({
   fullname: {
     type: String,
     require: true,
@@ -39,4 +36,4 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.models.User || mongoose.model("User", UserSchema);
+export default mongoose.models.User || mongoose.model<UserDocument>("User", UserSchema);

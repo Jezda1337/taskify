@@ -25,7 +25,7 @@ const Layout = ({ children }: Props) => {
     <>{children}</>
   ) : (
     <>
-      <AppBar open={open} toggleDrawer={toggleDrawer} />
+      <AppBar toggleDrawer={toggleDrawer} />
       <Box sx={{ display: "flex" }} className="fade-in">
         {isSmallScreen ? <DrawerMobile /> : <Drawer open={open} />}
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

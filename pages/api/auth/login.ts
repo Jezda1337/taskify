@@ -11,13 +11,13 @@ interface NextApiLoginRequest extends NextApiRequest {
 
 const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
   if (req.method !== "POST") {
-    res.status(500).json({ message: "Only POST requests here!" });
+    return res.status(500).json({ message: "Only POST requests here!" });
   }
 
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400).json({ message: "Please fill in all fields!" });
+    return res.status(400).json({ message: "Please fill in all fields!" });
   }
 
   try {
@@ -30,16 +30,18 @@ const handler: NextApiHandler = async (req: NextApiLoginRequest, res) => {
         req.body.password,
         user.password
       );
-      !validPassword && res.status(400).json("Incorrect password");
+      if (!validPassword) {
+        return res.status(400).json("Incorrect password");
+      }
 
-      const { id, fullname, email, avatar } = user;
-      res.status(200).json({ id, fullname, email, avatar });
-    } else {
-      res.status(500).json({ message: "Failed to log in!" });
+      const { _id, fullname, email, avatar } = user;
+      return res.status(200).json({ _id, fullname, email, avatar });
     }
   } catch (error: any) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
+
+  return res.status(500).json({ message: "Failed to log in!" });
 };
 
 export default withMongo(handler);

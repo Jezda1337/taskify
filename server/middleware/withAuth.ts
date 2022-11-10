@@ -6,7 +6,7 @@ export const withAuth = (handler: NextApiHandler) => async (req: NextApiRequest,
   const accessToken = req.cookies[Cookies.AccessToken];
   const token = verifyAccessToken(accessToken as string);
   if (!token) {
-    res.status(401).json({ message: "Not signed in" });
+    return res.status(401).json({ message: "Not signed in" });
   }
 
   return handler(req, res);

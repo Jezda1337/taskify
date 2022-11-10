@@ -10,14 +10,14 @@ interface DrawerProps extends MuiDrawerProps {
 const drawerHeight = 64;
 
 const showMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("height", {
+  transition: theme.transitions.create("transform", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
 });
 
 const hideMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("height", {
+  transition: theme.transitions.create("transform", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
@@ -28,16 +28,11 @@ const StyledDrawer = styled(MuiDrawer, {
 })<DrawerProps>(({ theme, hide }) => ({
   "& .MuiDrawer-paper": {
     width: "100vw",
-    height: hide ? 0 : drawerHeight,
+    height: drawerHeight,
+    transform: hide ? `translateY(100%)` : "translateY(0)",
     ...(hide ? { ...hideMixin(theme) } : { ...showMixin(theme) }),
     overflow: "hidden",
   },
-  width: "100vw",
-  position: "fixed",
-  whiteSpace: "nowrap",
-  flexShrink: 0,
-  ...(hide ? { ...hideMixin(theme) } : { ...showMixin(theme) }),
-  overflow: "hidden",
 }));
 
 const DrawerMobile = () => {

@@ -1,4 +1,3 @@
-import { getCookie } from "cookies-next";
 import  jwt from "jsonwebtoken";
 import { NextApiHandler } from "next";
 import { Cookies } from "server/enums/cookies.enum";
@@ -12,8 +11,8 @@ const handler: NextApiHandler = async (req, res) => {
     res.status(500).json({ message: "Only GET requests here!" })
   }
   
-  const accessToken = getCookie(Cookies.AccessToken, { req, res }) as string;
-  const userId = (jwt.decode(accessToken)! as AccessTokenPayload)?.userId;
+  const accessToken = req.cookies[Cookies.AccessToken]!;
+  const userId = (jwt.decode(accessToken) as AccessTokenPayload)!.userId;
   const user = await getUserById(userId);
   if (!user) {
     throw new Error('User not found');
