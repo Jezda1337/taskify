@@ -12,15 +12,14 @@ import Logo from "../Logo";
 import Divider from "@mui/material/Divider";
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-  toggleDrawer?: () => void;
+  toggleDrawer: () => void;
 }
 
 const EmptyAppBar = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const StyledAppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({
+const StyledAppBar = styled(MuiAppBar)<MuiAppBarProps>(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width"], {
     easing: theme.transitions.easing.sharp,
@@ -28,12 +27,11 @@ const StyledAppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({
   }),
 }));
 
-const AppBar = ({ open, toggleDrawer }: AppBarProps) => {
+const AppBar = ({ toggleDrawer }: AppBarProps) => {
   return (
     <>
       <StyledAppBar
         position="fixed"
-        open={open}
         color="transparent"
         elevation={0}
         className="bg-glass"

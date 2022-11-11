@@ -1,5 +1,5 @@
 export interface UserDocument {
-  id: string;
+  _id: string;
   tokenVersion: number;
   githubUserId?: string;
   fullname: string;

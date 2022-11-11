@@ -1,18 +1,11 @@
 
 import withMongo from 'server/middleware/withMongo';
-import { NextApiHandler, NextApiRequest } from 'next';
-import { RegisterReq } from 'types/auth/register-req.type';
-import bcrypt from 'bcrypt';
+import { NextApiHandler } from 'next';
 import { buildTokens, setTokens } from 'server/services/token.service';
-import { createGithubUser, createUser, getUserByGithubId } from 'server/services/user.service';
-import { v4 as uuidv4 } from 'uuid';
+import { createGithubUser, getUserByGithubId } from 'server/services/user.service';
 import { getGithubUser } from 'server/adapters/github-adapter';
 import { WithId } from 'mongodb';
 import { UserProfile } from 'types/auth/user-profile.type';
-
-interface NextApiRegisterRequest extends NextApiRequest {
-  body: RegisterReq;
-}
 
 const handler: NextApiHandler = async (req, res) => {
   const { code } = req.query;
@@ -20,7 +13,6 @@ const handler: NextApiHandler = async (req, res) => {
   let user: WithId<UserProfile> | UserProfile | null = await getUserByGithubId(githubUser.id);
   if (!user) {
     const githubUserBody = {
-      id: uuidv4(),
       fullname: githubUser.name,
       email: githubUser.email,
       githubUserId: githubUser.id,
@@ -29,7 +21,7 @@ const handler: NextApiHandler = async (req, res) => {
     user = await createGithubUser(githubUserBody);
   }
 
-  const { accessToken, refreshToken } = buildTokens(user);
+  const { accessToken, refreshToken } = buildTokens(user._id, user.tokenVersion);
   setTokens(req, res, accessToken, refreshToken);
 
   res.redirect(`${process.env.CLIENT_URL}`);

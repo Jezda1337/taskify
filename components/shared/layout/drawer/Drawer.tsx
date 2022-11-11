@@ -42,11 +42,6 @@ const StyledDrawer = styled(MuiDrawer, {
     scrollbarWidth: "thin",
     ...(open ? { ...openedMixin(theme) } : { ...closedMixin(theme) }),
   },
-  whiteSpace: "nowrap",
-  flexShrink: 0,
-  overflowX: "hidden",
-  maxWidth: 500,
-  ...(open ? { ...openedMixin(theme) } : { ...closedMixin(theme) }),
 }));
 
 const Drawer = ({ open }: DrawerProps) => {

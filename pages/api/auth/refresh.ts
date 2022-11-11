@@ -6,7 +6,7 @@ import { getUserById } from "server/services/user.service";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== "GET") {
-    res.status(500).json({ message: "Only GET requests here!" })
+    return res.status(500).json({ message: "Only GET requests here!" })
   }
 
   const oldToken = req.cookies[Cookies.RefreshToken]!;
@@ -24,6 +24,7 @@ const handler: NextApiHandler = async (req, res) => {
     
   } catch (error) {
     clearTokens(req, res);
+    return res.status(500).json(error);
   }
 
   res.end();
