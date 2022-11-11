@@ -43,7 +43,7 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getUserByGithubId(githubId: string) {
-  const user: Omit<UserDocument, 'password'> | null = await User.findOne({ githubId });
+  const user: Omit<UserDocument, 'password'> | null = await User.findOne({ githubUserId: String(githubId) });
   return user;
 }
 
