@@ -50,7 +50,6 @@ async function getUserEmail(accessToken: string): Promise<string> {
     },
   });
   const primaryEmail = emailResponse?.find(email => email.primary && email.verified);
-  console.log('primaryEmail: ', primaryEmail);
 
   return primaryEmail!.email;
 }
