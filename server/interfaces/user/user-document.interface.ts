@@ -5,6 +5,7 @@ export interface UserDocument {
   fullname: string;
   email: string;
   password: string;
+  hasPassword: boolean;
   avatar: string;
   role: "user" | "admin";
 }

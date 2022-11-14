@@ -31,7 +31,8 @@ const handler: NextApiHandler = async (req: NextApiRegisterRequest, res) => {
     const userBody = {
       fullname,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      hasPassword: true,
     };
 
     const user = await createUser(userBody);
