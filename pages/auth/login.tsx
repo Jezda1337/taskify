@@ -9,6 +9,7 @@ import { FormControls } from "types/shared/form-controls.type";
 import { LoginReq } from "types/auth/login-req.type";
 import { createBody } from "utils/helpers";
 import { Validators } from "utils/Validators";
+import { Alert } from "@mui/material";
 
 const initialInputs: FormControls = {
   email: {
@@ -40,6 +41,7 @@ const initialInputs: FormControls = {
 const Login = () => {
   const { inputs, setInputs, formIsValid } = useForm(initialInputs);
   const router = useRouter();
+  const { error } = router.query;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,24 +55,29 @@ const Login = () => {
   };
 
   return (
-      <AuthLayout>
-        <AuthForm
-          title="Welcome back"
-          btnText="Sign in"
-          inputs={inputs}
-          setInputs={setInputs}
-          formIsValid={formIsValid}
-          handleSubmit={handleSubmit}
-        />
-        <div>
-          <p>
-            New to Taskify?{" "}
-            <Link href="/auth/register">
-              <a className="text-primary">Sign up</a>
-            </Link>
-          </p>
-        </div>
-      </AuthLayout>
+    <AuthLayout>
+      {error === 'github' ? (
+        <Alert severity="error">
+          Unable to authenticate via Github at the moment. Please revise your github permissions and try again.
+        </Alert>
+      ) : null}
+      <AuthForm
+        title="Welcome back"
+        btnText="Sign in"
+        inputs={inputs}
+        setInputs={setInputs}
+        formIsValid={formIsValid}
+        handleSubmit={handleSubmit}
+      />
+      <div>
+        <p>
+          New to Taskify?{" "}
+          <Link href="/auth/register">
+            <a className="text-primary">Sign up</a>
+          </Link>
+        </p>
+      </div>
+    </AuthLayout>
   );
 };
 

@@ -3,4 +3,5 @@ export interface GithubUserBody {
   email: string;
   githubUserId: string;
   avatar: string;
+  hasPassword: boolean;
 }

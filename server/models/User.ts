@@ -4,19 +4,23 @@ import { UserDocument } from 'server/interfaces/user/user-document.interface';
 const UserSchema = new mongoose.Schema<UserDocument>({
   fullname: {
     type: String,
-    require: true,
+    required: true,
     min: 2,
     max: 50
   },
   email: {
     type: String,
-    require: true,
     max: 50,
+    required: true, 
+    index: true, 
     unique: true
   },
   password: {
     type: String,
     min: 6,
+  },
+  hasPassword: {
+    type: Boolean,
   },
   githubUserId: {
     type: String,
@@ -36,4 +40,7 @@ const UserSchema = new mongoose.Schema<UserDocument>({
   }
 });
 
-export default mongoose.models.User || mongoose.model<UserDocument>("User", UserSchema);
+const User = mongoose.models.User || mongoose.model<UserDocument>('User', UserSchema);
+User.createIndexes();
+
+export default User;
