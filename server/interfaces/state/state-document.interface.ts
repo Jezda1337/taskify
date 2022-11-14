@@ -1,6 +1,6 @@
-import { TasksDocument } from "../task/task-document.interface";
+import { TaskDocument } from "../task/task-document.interface";
 
 export interface StateDocument {
   name: string;
-  tasks: [Task];
+  tasks: TaskDocument[];
 }

@@ -6,5 +6,5 @@ export interface TaskDocument {
   priority: string;
   description: string;
   assignee: UserDocument;
-  comments: [CommentDocument];
+  comments: CommentDocument[];
 }
