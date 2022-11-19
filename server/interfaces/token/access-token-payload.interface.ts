@@ -1,3 +1,3 @@
 export interface AccessTokenPayload {
-  userId: any;
+  userId: string;
 }
