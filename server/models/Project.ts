@@ -3,6 +3,7 @@ import { Schema, models, model } from "mongoose";
 const ProjectSchema = new Schema({
   name: String,
   adminId: { type: Schema.Types.ObjectId, ref: "User" },
+  description: String,
   taskStates: [{ type: Schema.Types.ObjectId, ref: "State" }],
   contributors: [{ type: Schema.Types.ObjectId, ref: "User" }],
   userReq: [{ type: Schema.Types.ObjectId, ref: "User" }],
