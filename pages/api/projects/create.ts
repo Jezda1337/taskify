@@ -12,6 +12,9 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
+    if (!body.name) {
+      return res.status(400).json({ message: "Provide project name." });
+    }
     const createProject = await Project.create(body);
     await createProject.save();
 
