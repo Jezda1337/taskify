@@ -44,7 +44,12 @@ const ProfileDetailTabs = () => {
 
   return (
     <>
-      <Box className={`fade-in grow sticky top-[${isSmallScreen ? 56 : 64}px] z-[1] bg-background z-1`} >
+      <Box
+        className={`fade-in grow sticky z-[1] bg-background z-1`}
+        style={{
+          top: isSmallScreen ? 56 : 64,
+        }}
+      >
         <Tabs
           value={selectedTab}
           onChange={handleChange}
@@ -71,6 +76,41 @@ const ProfileDetailTabs = () => {
       </Box>
 
       <TabPanel selectedIndex={selectedTab} index={ProfileTabs.OVERVIEW}>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
+        <h2 className="fade-in">Overview component</h2>
         <h2 className="fade-in">Overview component</h2>
       </TabPanel>
       <TabPanel selectedIndex={selectedTab} index={ProfileTabs.TEAM_MATES}>
