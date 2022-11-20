@@ -39,3 +39,6 @@ export const drawerNavItems = [
     activeIcon: <SettingsSuggestIcon />,
   },
 ];
+
+export const openDrawerWidth = 240;
+export const closedDrawerWidth = 64;

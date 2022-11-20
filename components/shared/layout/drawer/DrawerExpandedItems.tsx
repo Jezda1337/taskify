@@ -15,43 +15,28 @@ import { drawerNavItems } from "utils/constants";
 import IsActiveBar from "./IsActiveBar";
 
 const DrawerExpandedItems = () => {
-  const { asPath } = useRouter();
+  const { asPath: currentUrl } = useRouter();
   const theme: Theme = useTheme();
 
   return (
     <>
-      <Stack
-        component="ul"
-        p={0}
-        m={0}
-        className="fade-in"
-        style={{ animationDelay: "100ms" }}
-      >
+      <Stack component="ul" p={0} m={0} className="fade-in">
         {drawerNavItems.map(({ label, path, exact, icon, activeIcon }) => (
           <NextLink key={path} href={path} passHref>
             <ListItem disablePadding component="a" className="relative">
-              <IsActiveBar isActive={isActive(asPath, path, exact)} direction='column' />
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  px: 2.5,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <ListItemIcon
-                  style={{
-                    minWidth: "unset",
-                    color: theme.palette.text.primary,
-                  }}
-                >
-                  {isActive(path, asPath, exact) ? activeIcon : icon}
+              <IsActiveBar
+                isActive={isActive(path, currentUrl, exact)}
+                direction="column"
+              />
+              <ListItemButton className="min-h-[48px] px-5 justify-center items-center">
+                <ListItemIcon className="min-w-[unset]">
+                  {isActive(path, currentUrl, exact) ? activeIcon : icon}
                 </ListItemIcon>
                 <ListItemText
                   primary={label}
                   primaryTypographyProps={{
                     ml: "1.5rem",
-                    fontWeight: isActive(path, asPath, exact) ? 900 : 400,
+                    fontWeight: isActive(path, currentUrl, exact) ? 900 : 400,
                   }}
                 />
               </ListItemButton>
