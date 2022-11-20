@@ -31,7 +31,12 @@ const Layout = ({ children }: Props) => {
         {isSmallScreen ? <DrawerMobile /> : <Drawer open={open} />}
         <Box
           component="main"
-          className={`${!isSmallScreen ? `ml-[${open ? openDrawerWidth : closedDrawerWidth}px]` : ''} ease-in-out duration-[195ms] grow p-6`}
+          style={{
+            ...(!isSmallScreen && {
+              marginLeft: open ? openDrawerWidth : closedDrawerWidth,
+            }),
+          }}
+          className={'ease-in-out duration-[195ms] grow p-6'}
         >
           {children}
         </Box>
