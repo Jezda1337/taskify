@@ -13,7 +13,7 @@ export const withAuthSSR = <T>(
 
     const result = getProps ? await getProps({ context, fetcher, user }) : {};
     const props = (result as any).props || {};
-
+    
     return { ...result, props: { user, ...props } };
   }
 

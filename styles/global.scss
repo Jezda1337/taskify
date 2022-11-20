@@ -11,9 +11,11 @@
     --color-selection-text: #000000;
     // Themed colors
     --color-text: rgba(0, 0, 0, 0.87);
+    --color-background: #fff;
   }
   body.dark {
     --color-text: #fff;
+    --color-background: rgba(0, 0, 0, 1);
   }
 }
 

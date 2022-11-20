@@ -36,16 +36,13 @@ const AppBar = ({ toggleDrawer }: AppBarProps) => {
         elevation={0}
         className="bg-glass"
       >
-        <Toolbar style={{ width: "100vw" }}>
+        <Toolbar className='w-[100vw]'>
           <IconButton
-            className="hidden sm:flex"
+            className="hidden sm:flex mr-10"
             color="inherit"
             aria-label="Toggle side menu"
             onClick={toggleDrawer}
             edge="start"
-            sx={{
-              marginRight: 5,
-            }}
           >
             <MenuIcon />
           </IconButton>

@@ -6,6 +6,7 @@ import Drawer from "./drawer/Drawer";
 import DrawerMobile from "./drawer/DrawerMobile";
 import { useStorage } from "hooks/useStorage";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { closedDrawerWidth, openDrawerWidth } from "utils/constants";
 
 type Props = {
   children: React.ReactNode;
@@ -26,9 +27,12 @@ const Layout = ({ children }: Props) => {
   ) : (
     <>
       <AppBar toggleDrawer={toggleDrawer} />
-      <Box sx={{ display: "flex" }} className="fade-in">
+      <Box className="fade-in">
         {isSmallScreen ? <DrawerMobile /> : <Drawer open={open} />}
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box
+          component="main"
+          className={`${!isSmallScreen ? `ml-[${open ? openDrawerWidth : closedDrawerWidth}px]` : ''} ease-in-out duration-[195ms] grow p-6`}
+        >
           {children}
         </Box>
       </Box>

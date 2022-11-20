@@ -27,8 +27,8 @@ export const createBody = (inputs: FormControls) => {
 };
 
 export const isActive = (linkPath: string, currentUrl: string, exact?: boolean): boolean => {
-  const isExact = (currentUrl === linkPath && linkPath.length > 1) || (currentUrl === "/" && currentUrl === linkPath);
-  const startsWith = (currentUrl.startsWith(linkPath) && linkPath.length > 1) || (currentUrl === "/" && currentUrl === linkPath);
+  const isExact = currentUrl === linkPath;
+  const startsWith = (currentUrl.startsWith(linkPath) && linkPath.length > 1) ;
 
   return exact ? isExact : startsWith;
 }

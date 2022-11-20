@@ -14,6 +14,7 @@ import Brightness2Icon from "@mui/icons-material/Brightness2";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import { useRouter } from "next/router";
 import { axiosClient } from "middleware/axios";
+import NextLink from "next/link";
 
 const AccountMenu = () => {
   const { dark, setDark, user } = useContext(NavContext) as NavContextType;
@@ -67,11 +68,19 @@ const AccountMenu = () => {
         }}
       >
         <Stack direction="column" spacing={2} p={2}>
-          
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Avatar alt="Profile" src={user?.avatar ? user?.avatar : ""} />{" "}
-            <strong>{user?.fullname}</strong>
-          </Stack>
+          <div onClick={handleClose}>
+            <NextLink href={`/people/${user?._id}`} passHref>
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                component="a"
+              >
+                <Avatar alt="Profile" src={user?.avatar ? user?.avatar : ""} />{" "}
+                <strong>{user?.fullname}</strong>
+              </Stack>
+            </NextLink>
+          </div>
 
           <Divider />
 
@@ -88,7 +97,6 @@ const AccountMenu = () => {
             </ListItemIcon>
             Sign out
           </MenuItem>
-
         </Stack>
       </Menu>
     </>

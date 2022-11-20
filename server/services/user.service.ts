@@ -3,6 +3,7 @@ import { UpdateUserReq } from "server/interfaces/user/update-user-req.interface"
 import { UserDocument } from "server/interfaces/user/user-document.interface";
 import User from "server/models/User";
 import { RegisterUserBody } from "types/auth/register-user-body.interface";
+import { UserProfile } from "types/auth/user-profile.type";
 
 export async function createUser(userBody: RegisterUserBody) {
   const newUser = new User(userBody);
@@ -33,7 +34,7 @@ export async function incrementTokenVersion(id: string) {
 }
 
 export async function getUserById(id: string) {
-  const user: Omit<UserDocument, 'password'> | null = await User.findById(id, { password: 0 });
+  const user: UserProfile | null = await User.findById(id, { password: 0 });
   return user;
 }
 
@@ -43,7 +44,7 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getUserByGithubId(githubId: string) {
-  const user: Omit<UserDocument, 'password'> | null = await User.findOne({ githubUserId: String(githubId) });
+  const user: UserProfile | null = await User.findOne({ githubUserId: String(githubId) });
   return user;
 }
 
