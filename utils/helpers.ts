@@ -28,7 +28,14 @@ export const createBody = (inputs: FormControls) => {
 
 export const isActive = (linkPath: string, currentUrl: string, exact?: boolean): boolean => {
   const isExact = currentUrl === linkPath;
-  const startsWith = (currentUrl.startsWith(linkPath) && linkPath.length > 1) ;
+  const startsWith = (currentUrl.startsWith(linkPath) && linkPath.length > 1);
 
   return exact ? isExact : startsWith;
+}
+
+export const getTabValue = (tab: number | undefined, tabsEnum: Object): number => {
+  if(!tab) return 0;
+
+  const isValidValue = Object.values(tabsEnum).includes(tab);
+  return isValidValue ? tab : 0;
 }

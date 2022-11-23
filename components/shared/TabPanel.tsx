@@ -8,6 +8,13 @@ type TabPanelProps = {
   selectedIndex: number;
 }
 
+export function a11yPropsTabs(index: number) {
+  return {
+    id: `tab-${index}`,
+    "aria-controls": `tabpanel-${index}`,
+  };
+}
+
 export default function TabPanel(props: TabPanelProps) {
   const { children, selectedIndex, index, ...other } = props;
 
