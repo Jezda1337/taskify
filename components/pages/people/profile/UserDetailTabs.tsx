@@ -1,34 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import TabPanel, { a11yPropsTabs } from "@/components/shared/TabPanel";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
-import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
-import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-import { ProfileTabs } from "enums/profile-tabs.enum";
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import { UserTabs } from "enums/user-tabs.enum";
 import { useRouter } from "next/router";
 import { getTabValue } from "utils/helpers";
 
-const tabs = [
+const userTabs = [
   {
     label: "Overview",
     icon: <AssignmentIndOutlinedIcon />,
   },
   {
-    label: "Teammates",
-    icon: <EngineeringOutlinedIcon />,
-  },
-  {
-    label: "Projects",
-    icon: <AssignmentOutlinedIcon />,
+    label: "Settings",
+    icon: <TuneOutlinedIcon />,
   },
 ];
 
-const ProfileDetailTabs = () => {
+const UserDetailTabs = () => {
   const router = useRouter();
-  const selectedTab: ProfileTabs = getTabValue(Number(router.query.tab), ProfileTabs);
+  const selectedTab: UserTabs = getTabValue(Number(router.query.tab), UserTabs);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down(600));
 
@@ -40,14 +35,12 @@ const ProfileDetailTabs = () => {
     <>
       <Box
         className={`fade-in grow sticky z-[1] bg-background z-1`}
-        style={{
-          top: isSmallScreen ? 56 : 64,
-        }}
+        style={{ top: isSmallScreen ? 56 : 64 }}
       >
         <Tabs
           value={selectedTab}
           onChange={handleChange}
-          aria-label="Profile tabs"
+          aria-label="User tabs"
           variant="scrollable"
           sx={{
             [`& .${tabsClasses.scrollButtons}`]: {
@@ -56,7 +49,7 @@ const ProfileDetailTabs = () => {
           }}
           scrollButtons={isSmallScreen ? false : "auto"}
         >
-          {tabs.map((tab, index) => (
+          {userTabs.map((tab, index) => (
             <Tab
               className="min-h-[unset]"
               icon={tab.icon}
@@ -69,17 +62,14 @@ const ProfileDetailTabs = () => {
         </Tabs>
       </Box>
 
-      <TabPanel selectedIndex={selectedTab} index={ProfileTabs.OVERVIEW}>
+      <TabPanel selectedIndex={selectedTab} index={UserTabs.OVERVIEW}>
         <h2 className="fade-in">Overview component</h2>
       </TabPanel>
-      <TabPanel selectedIndex={selectedTab} index={ProfileTabs.TEAM_MATES}>
-        <h2 className="fade-in">Teammates component</h2>
-      </TabPanel>
-      <TabPanel selectedIndex={selectedTab} index={ProfileTabs.PROJECTS}>
-        <h2 className="fade-in">Projects component</h2>
+      <TabPanel selectedIndex={selectedTab} index={UserTabs.SETTINGS}>
+        <h2 className="fade-in">Settings component</h2>
       </TabPanel>
     </>
   );
 };
 
-export default ProfileDetailTabs;
+export default UserDetailTabs;

@@ -9,22 +9,17 @@ import { Stack } from "@mui/system";
 
 type ProfileInfoProps = {
   profile: UserProfile;
-  user: UserProfile;
+  isMyProfile: boolean;
 };
 const ProfileInfo = ({
   profile: { _id, fullname, email, avatar },
-  user,
+  isMyProfile,
 }: ProfileInfoProps) => {
-  const [isMyProfile, setIsMyProfile] = React.useState(user._id === _id);
-
-  useEffect(() => {
-    setIsMyProfile(user._id === _id);
-  }, [user._id, _id]);
 
   return (
     <Stack className="fade-in sticky top-[80px] m-auto gap-6 justify-center items-center flex-col max-w-[300px]">
       <Image
-        src={avatar}
+        src={avatar || "/images/profile.webp"}
         alt={fullname}
         width={220}
         height={220}

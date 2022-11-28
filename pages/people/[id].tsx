@@ -1,15 +1,18 @@
 import ProfileDetailTabs from "@/components/pages/people/profile/ProfileDetailTabs";
 import ProfileInfo from "@/components/pages/people/profile/ProfileInfo";
+import UserDetailTabs from "@/components/pages/people/profile/UserDetailTabs";
 import { Container, Grid, Typography } from "@mui/material";
 import { withAuthSSR } from "middleware/withAuthSSR";
 import { ParsedUrlQuery } from "querystring";
 import { UserProfile } from "types/auth/user-profile.type";
 
 type ProfileProps = {
-  user: UserProfile;
   profile: UserProfile;
+  user: UserProfile;
+  isMyProfile: boolean;
 };
-export default function Profile({ profile, user }: ProfileProps) {
+export default function Profile({ profile, isMyProfile }: ProfileProps) {
+
   if (!profile)
     return (
       <Typography component={"h1"} variant="h3">
@@ -22,10 +25,10 @@ export default function Profile({ profile, user }: ProfileProps) {
       <Container maxWidth="xl" disableGutters>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={4} xl={3}>
-            <ProfileInfo profile={profile} user={user} />
+            <ProfileInfo profile={profile} isMyProfile={isMyProfile} />
           </Grid>
           <Grid item xs={12} md={6} lg={8} xl={9}>
-            <ProfileDetailTabs />
+            {isMyProfile ? <UserDetailTabs /> : <ProfileDetailTabs />}
           </Grid>
         </Grid>
       </Container>
@@ -44,6 +47,7 @@ export const getServerSideProps = withAuthSSR(
       return {
         props: {
           profile: user,
+          isMyProfile: true,
         },
       };
     }
@@ -64,6 +68,7 @@ export const getServerSideProps = withAuthSSR(
     return {
       props: {
         profile: fetchedUser,
+        isMyProfile: false,
       },
     };
   }
